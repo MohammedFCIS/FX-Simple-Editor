@@ -28,8 +28,8 @@ public class BasicDocument extends Document
 	@Override
 	public int getNumWords()
 	{
-		String[] word = getText().split("[a-zA-Z]+");
-	    return word.length;
+		List<String> word = getTokens("[a-zA-Z]+");
+	    return word.size();
 	}
 	
 	/**
@@ -42,10 +42,12 @@ public class BasicDocument extends Document
 	 */
 	@Override
 	public int getNumSentences()
-	{
-		String[] senttences = getText().split("[!?.]+");
+	{   //[^0-9\\.0-9]+
+		//1 4 0 3 12 0 1 13 0 1 4 0 1 7 0 115 1000 0 
+		//1 4 0 3 12 0 1 13 0 3 4 0 2 7 0 115 1000 0 
+		List<String> senttences = getTokens("[!?.]+|[a-zA-Z]+$");
 		
-        return senttences.length;
+        return senttences.size();
 	}
 	
 	/**
@@ -58,9 +60,12 @@ public class BasicDocument extends Document
 	 */
 	@Override
 	public int getNumSyllables()
-	{
-	    //TODO: Implement this method.  See the Module 1 support videos 
-        // if you need help.
+	{	 
+		List<String> syllables = getTokens("[AEIOUYaeiouy]+");
+		int len = syllables.size();
+		for(String syllable:syllables){
+			
+		}
         return 0;
 	}
 	
